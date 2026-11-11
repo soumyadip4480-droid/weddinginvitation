@@ -9,8 +9,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="শুভ বিবাহ | বর্ষা ও প্রসেনজিৎ" />
   <meta property="og:description" content="আমাদের বিবাহের শুভলগ্নে আপনাদের সস্নেহ আমন্ত্রণ। Click the link below to view all details 👇" />
-  
-  <!-- UPDATED: Pointing exactly to your Netlify domain -->
   <meta property="og:image" content="https://wedbarsha-prosenjit781.netlify.app/image/preview.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,7 +16,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Galada&family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="Style.css" />
 </head>
-<body>
+<body class="locked">
+
+  <!-- WELCOME SCREEN (Forces interaction to unlock audio) -->
+  <div class="welcome" id="welcomeScreen">
+    <div class="welcome-box">
+      <div class="symbol-big">ॐ</div>
+      <h1>শুভ বিবাহ</h1>
+      <p class="wnames">বর্ষা ও প্রসেনজিৎ</p>
+      <button class="open-btn" id="openBtn">আমন্ত্রণ পত্র খুলুন</button>
+    </div>
+  </div>
+
   <div class="petals" id="petals" aria-hidden="true"></div>
 
   <main class="card">
@@ -99,7 +108,7 @@
     <section class="block reveal" id="help">
       <h2 class="title">ঠিকানা খুঁজে পেতে সমস্যা?</h2>
       <div class="dots"><i></i><i></i><i></i></div>
-      <p>কোনো অসুবিধা হলে নির্দ্বিধায় ক্যামাদের ফোন করুন।</p>
+      <p>কোনো অসুবিধা হলে নির্দ্বিধায় আমাদের ফোন করুন।</p>
       <a class="btn alt" id="whatsapp" target="_blank" rel="noopener" hidden>💬 WhatsApp-এ যোগাযোগ করুন</a>
     </section>
 
@@ -120,7 +129,3 @@
 
   <audio id="bgm" src="audio/music.mp3" loop preload="auto"></audio>
   <button id="musicBtn" class="music" aria-label="Toggle music">🔇</button>
-
-  <script src="Script.js"></script>
-</body>
-</html>
