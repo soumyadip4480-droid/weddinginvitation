@@ -107,9 +107,7 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-/* ---------- Welcome Screen & Audio ---------- */
-const welcomeScreen = $("welcomeScreen");
-const openBtn = $("openBtn");
+/* ---------- Background music (30% volume) ---------- */
 const bgm = $("bgm");
 const musicBtn = $("musicBtn");
 bgm.volume = 0.3;
@@ -118,14 +116,20 @@ const setIcon = () => (musicBtn.textContent = bgm.paused ? "🔇" : "🔊");
 bgm.addEventListener("play", setIcon);
 bgm.addEventListener("pause", setIcon);
 
-// Unlock audio and reveal invitation on button click
-openBtn.addEventListener("click", () => {
-  bgm.play().catch(() => console.log("Audio play blocked by browser"));
-  welcomeScreen.classList.add("hide");
-  document.body.classList.remove("locked");
+// Try to start the music right away. If the browser blocks it,
+// start it on the visitor's first tap, scroll or key press.
+bgm.play().catch(() => {
+  const unlock = () => {
+    bgm.play().catch(() => {});
+    ["click", "touchstart", "scroll", "keydown"].forEach((ev) =>
+      window.removeEventListener(ev, unlock)
+    );
+  };
+  ["click", "touchstart", "scroll", "keydown"].forEach((ev) =>
+    window.addEventListener(ev, unlock, { once: true, passive: true })
+  );
 });
 
-// Floating mute/unmute button logic
 musicBtn.addEventListener("click", () => {
   bgm.paused ? bgm.play().catch(() => {}) : bgm.pause();
 });
