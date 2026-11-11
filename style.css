@@ -1,0 +1,201 @@
+:root {
+  --bg: #0e0d0c;
+  --bg2: #171513;
+  --gold: #e8c872;
+  --gold-soft: #b8944a;
+  --text: #f1e8d8;
+  --muted: #a79d8c;
+  --glass: rgba(255,255,255,.05);
+  --line: rgba(232,200,114,.22);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Hind Siliguri", sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(232,200,114,.08), transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  display: flex; justify-content: center;
+}
+.card {
+  width: 100%; max-width: 560px; min-height: 100vh; position: relative; z-index: 2;
+  background: transparent;
+}
+
+/* ---------- Falling petals ---------- */
+.petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+.petal {
+  position: absolute; top: -20px; width: 8px; height: 12px;
+  background: var(--gold-soft); opacity: .28;
+  border-radius: 0 100% 0 100%;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translate3d(var(--dx, 40px), 110vh, 0) rotate(540deg); }
+}
+
+/* ---------- Shared ---------- */
+.eyebrow {
+  font-size: 14px; letter-spacing: 0; color: var(--gold);
+  font-weight: 500; text-align: center; line-height: 1.8;
+}
+.divider { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 16px 0; width: 220px; }
+.divider::before, .divider::after { content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, transparent, var(--gold)); }
+.divider::after { transform: scaleX(-1); }
+.divider span { color: var(--gold); font-size: 14px; }
+.dots { display: flex; justify-content: center; gap: 8px; margin: 10px 0 20px; }
+.dots i { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); }
+.title {
+  font-family: "Noto Serif Bengali", serif; font-weight: 800; color: var(--gold);
+  font-size: 26px; text-align: center; line-height: 1.5;
+  text-shadow: 0 0 18px rgba(232,200,114,.25);
+}
+.title.script { font-family: "Galada", cursive; font-weight: 400; font-size: 32px; }
+
+.block { padding: 70px 28px; text-align: center; line-height: 1.9; }
+.block p { margin: 12px auto; font-size: 17px; max-width: 420px; color: var(--text); }
+.block p.to { text-align: left; }
+.block p.sign { text-align: right; margin-top: 26px; }
+.sign strong { color: var(--gold); }
+
+.reveal { opacity: 0; transform: translateY(34px); filter: blur(4px); transition: all 1s ease; }
+.reveal.show { opacity: 1; transform: none; filter: none; }
+[hidden] { display: none !important; }
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 100vh; position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 60px 20px 90px;
+}
+.symbol { font-size: 34px; color: var(--gold); margin-bottom: 18px; text-shadow: 0 0 16px rgba(232,200,114,.5); }
+.names {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-family: "Galada", cursive; font-weight: 400;
+  font-size: clamp(44px, 13vw, 68px); line-height: 1.3; color: #f6e3a8;
+  text-shadow: 0 0 10px rgba(232,200,114,.7), 0 0 34px rgba(232,200,114,.35);
+}
+.names .and { font-family: "Hind Siliguri", sans-serif; font-style: normal; font-size: .4em; color: var(--muted); text-shadow: none; }
+.date-line { font-size: 16px; letter-spacing: .12em; color: var(--text); opacity: .9; max-width: 320px; }
+.badge {
+  margin-top: 34px; padding: 12px 30px; cursor: pointer;
+  background: transparent; color: var(--gold); font: 600 16px "Hind Siliguri", sans-serif;
+  border: 1px solid var(--gold); border-radius: 40px; letter-spacing: .08em;
+  transition: all .3s ease;
+}
+.badge:hover { background: var(--gold); color: #1a1408; box-shadow: 0 0 24px rgba(232,200,114,.45); }
+.scroll-hint { position: absolute; bottom: 26px; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--muted); }
+.scroll-hint small { font-size: 11px; letter-spacing: .2em; }
+.scroll-hint i { width: 12px; height: 12px; border-right: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold); transform: rotate(45deg); animation: bounce 1.6s infinite; }
+@keyframes bounce { 50% { transform: translateY(8px) rotate(45deg); } }
+
+/* ---------- Couple illustration ---------- */
+.arch {
+  width: 220px; margin: 0 auto; padding: 14px 10px 0;
+  border: 1px solid var(--line); border-radius: 110px 110px 12px 12px;
+  background: linear-gradient(#d9c6e6, #b79bd0);
+  box-shadow: 0 0 40px rgba(232,200,114,.18), 0 14px 34px rgba(0,0,0,.6);
+  overflow: hidden;
+}
+.arch img { width: 100%; height: auto; display: block; }
+.quote { font-family: "Noto Serif Bengali", serif; color: var(--muted); font-size: 15px !important; margin-top: 26px !important; }
+
+/* ---------- Countdown ---------- */
+.timer { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.timer div {
+  background: var(--glass); border: 1px solid var(--line); border-radius: 14px;
+  width: 78px; padding: 14px 0 12px; backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.4);
+}
+.timer .ico { display: block; font-size: 22px; line-height: 1; margin-bottom: 6px; }
+.timer b { display: block; font-size: 28px; font-family: "Noto Serif Bengali", serif; color: var(--gold); line-height: 1.4; }
+.timer small { font-size: 12px; letter-spacing: .12em; color: var(--muted); }
+
+/* ---------- Venue / map ---------- */
+.glass {
+  max-width: 400px; margin: 0 auto; padding: 32px 22px;
+  background: var(--glass); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+.ico-big { font-size: 34px; opacity: .8; margin-bottom: 10px; filter: grayscale(.4); }
+.venue-name { font-family: "Noto Serif Bengali", serif; font-weight: 800; color: var(--gold) !important; font-size: 20px !important; }
+.venue-time { color: var(--text); font-size: 16px !important; letter-spacing: .04em; }
+.map-wrap {
+  max-width: 420px; margin: 0 auto 20px; border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--gold-soft); box-shadow: 0 0 30px rgba(232,200,114,.15);
+}
+.map-wrap iframe { width: 100%; height: 260px; border: 0; display: block; filter: saturate(.85); }
+.btn {
+  display: block; max-width: 420px; margin: 12px auto 0; padding: 13px; border-radius: 40px;
+  background: linear-gradient(135deg, #e8c872, #b8944a); color: #1a1408;
+  text-decoration: none; font-weight: 700; letter-spacing: .03em;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(232,200,114,.35); }
+.btn.alt { background: linear-gradient(135deg, #7a6cf0, #5a46c8); color: #fff; }
+
+footer {
+  text-align: center; padding: 28px 12px 40px; color: var(--gold-soft);
+  font-weight: 500; letter-spacing: .08em; border-top: 1px solid var(--line);
+}
+
+/* ---------- Music button ---------- */
+.music {
+  position: fixed; right: 16px; bottom: 16px; z-index: 99;
+  width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--gold); background: rgba(14,13,12,.85); color: var(--gold); font-size: 20px;
+  box-shadow: 0 0 16px rgba(232,200,114,.3);
+}
+
+/* ---------- Welcome screen ---------- */
+body.locked { overflow: hidden; height: 100vh; }
+.welcome {
+  position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; text-align: center;
+  background: radial-gradient(circle at 50% 40%, #1d1912, #0a0908 70%);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.welcome.hide { opacity: 0; transform: scale(1.06); pointer-events: none; }
+.welcome-box {
+  border: 1px solid var(--line); border-radius: 20px; padding: 36px 28px; margin: 20px;
+  max-width: 360px; width: 100%; background: var(--glass);
+  box-shadow: 0 0 50px rgba(232,200,114,.12);
+}
+.symbol-big { font-size: 44px; color: var(--gold); text-shadow: 0 0 20px rgba(232,200,114,.5); }
+.welcome h1 { font-family: "Galada", cursive; font-weight: 400; font-size: 40px; color: #f6e3a8; margin: 6px 0; text-shadow: 0 0 18px rgba(232,200,114,.5); }
+.wnames { font-size: 19px; color: var(--text); margin-bottom: 24px; letter-spacing: .06em; }
+.open-btn {
+  background: transparent; color: var(--gold); border: 1px solid var(--gold); border-radius: 40px;
+  padding: 14px 26px; font: 600 17px "Hind Siliguri", sans-serif; cursor: pointer;
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse { 50% { transform: scale(1.05); box-shadow: 0 0 26px rgba(232,200,114,.4); } }
+
+/* ---------- Family popup ---------- */
+.modal {
+  position: fixed; inset: 0; z-index: 150; display: grid; place-items: center; padding: 16px;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity .35s ease;
+}
+.modal.open { opacity: 1; pointer-events: auto; }
+.modal-box {
+  position: relative; width: 100%; max-width: 440px; max-height: 90vh; overflow-y: auto;
+  background: var(--bg2); border: 1px solid var(--gold-soft); border-radius: 18px;
+  padding: 28px 18px 22px; text-align: center; line-height: 1.7;
+  transform: translateY(30px) scale(.96); transition: transform .35s ease;
+  box-shadow: 0 0 50px rgba(232,200,114,.15);
+}
+.modal.open .modal-box { transform: none; }
+.modal-box p { margin: 4px 0; font-size: 16px; }
+.modal-close {
+  position: absolute; top: 10px; right: 12px; width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--gold); background: transparent; color: var(--gold); font-size: 15px; cursor: pointer;
+}
+.ribbon {
+  display: inline-block; margin: 16px 0 10px; padding: 7px 30px;
+  color: var(--gold); border: 1px solid var(--gold); border-radius: 30px;
+  font-weight: 600; font-size: 17px; letter-spacing: .08em;
+}
+.family { background: var(--glass); border: 1px solid var(--line); border-radius: 14px; padding: 14px 10px; margin-bottom: 12px; }
+.fname { font-weight: 700; font-size: 19px !important; color: var(--gold); }
